@@ -28,11 +28,19 @@ while True:
     if base not in SUPPORTED_CURRENCIES:
         print("Moeda não suportada ou inválida.")
         continue
+    
+    try:
+        quantidade = float(input(f"Digite a quantidade de {base} que você deseja converter: "))
+    except ValueError:
+        print("Por favor, insira um número válido.")
+        continue   
 
     data = converte_valor(base)
     if not data:
         continue
-
+    
     del data[base]
+    # Imprime o valor convertido multiplicado pela quantidade inserida
     for ticker, value in data.items():
-        print(f"{ticker}: {value}")
+        valor_convertido = quantidade * value
+        print(f"{quantidade} {base} = {valor_convertido:.2f} {ticker}")
